@@ -21,7 +21,8 @@ function Contact() {
     setFeedback({ type: '', message: '' });
 
     try {
-      const response = await fetch('http://127.0.0.1:8000/api/contact', {
+      const apiUrl = process.env.REACT_APP_API_URL || 'http://localhost:8000';
+      const response = await fetch(`${apiUrl}/api/contact`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData),

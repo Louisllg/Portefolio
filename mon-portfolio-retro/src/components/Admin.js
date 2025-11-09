@@ -2,6 +2,8 @@ import React, { useEffect, useMemo, useState } from 'react';
 import './Admin.css';
 import { useNavigate } from 'react-router-dom';
 
+const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:8000';
+
 function Admin() {
   const [me, setMe] = useState(null);
   const [messages, setMessages] = useState([]);
@@ -36,7 +38,7 @@ function Admin() {
   useEffect(() => {
     const fetchMe = async () => {
       try {
-        const r = await fetch('http://localhost:8000/api/me', { credentials: 'include' });
+        const r = await fetch(`${API_URL}/api/me`, { credentials: 'include' });
         if (!r.ok) {
           navigate('/login');
           return;
@@ -50,7 +52,7 @@ function Admin() {
     };
     const fetchMessages = async () => {
       try {
-        const r = await fetch('http://localhost:8000/api/messages', { credentials: 'include' });
+        const r = await fetch(`${API_URL}/api/messages`, { credentials: 'include' });
         if (!r.ok) {
           navigate('/login');
           return;
@@ -63,7 +65,7 @@ function Admin() {
     };
     const fetchProjects = async () => {
       try {
-        const r = await fetch('http://localhost:8000/api/projects', { credentials: 'include' });
+        const r = await fetch(`${API_URL}/api/projects`, { credentials: 'include' });
         if (r.ok) {
           const data = await r.json();
           setProjects(data);
@@ -74,7 +76,7 @@ function Admin() {
     };
     const fetchTimeline = async () => {
       try {
-        const r = await fetch('http://localhost:8000/api/timeline', { credentials: 'include' });
+        const r = await fetch(`${API_URL}/api/timeline`, { credentials: 'include' });
         if (r.ok) {
           const data = await r.json();
           setTimeline(data);
@@ -85,7 +87,7 @@ function Admin() {
     };
     const fetchSkills = async () => {
       try {
-        const r = await fetch('http://localhost:8000/api/skills', { credentials: 'include' });
+        const r = await fetch(`${API_URL}/api/skills`, { credentials: 'include' });
         if (r.ok) {
           const data = await r.json();
           setSkills(data.skills || []);
@@ -104,7 +106,7 @@ function Admin() {
 
   const logout = async () => {
     try {
-      const r = await fetch('http://localhost:8000/api/logout', { method: 'POST', credentials: 'include' });
+      const r = await fetch(`${API_URL}/api/logout`, { method: 'POST', credentials: 'include' });
       if (r.ok) {
         setMe(null);
         setMessages([]);
@@ -138,7 +140,7 @@ function Admin() {
   const deleteMessage = async (id) => {
     if (!window.confirm('Supprimer ce message ?')) return;
     try {
-      const r = await fetch(`http://localhost:8000/api/messages/${id}`, {
+      const r = await fetch(`${API_URL}/api/messages/${id}`, {
         method: 'DELETE',
         credentials: 'include'
       });
@@ -170,8 +172,8 @@ function Admin() {
   const saveTimeline = async () => {
     try {
       const url = editingItem 
-        ? `http://localhost:8000/api/admin/timeline/${editingItem.id}` 
-        : 'http://localhost:8000/api/admin/timeline';
+        ? `${API_URL}/api/admin/timeline/${editingItem.id}` 
+        : `${API_URL}/api/admin/timeline`;
       const method = editingItem ? 'PUT' : 'POST';
 
       const r = await fetch(url, {
@@ -184,7 +186,7 @@ function Admin() {
       if (!r.ok) throw new Error('Erreur sauvegarde');
 
       // Refresh timeline
-      const refresh = await fetch('http://localhost:8000/api/timeline', { credentials: 'include' });
+      const refresh = await fetch(`${API_URL}/api/timeline`, { credentials: 'include' });
       if (refresh.ok) {
         const data = await refresh.json();
         setTimeline(data);
@@ -200,7 +202,7 @@ function Admin() {
   const deleteTimelineEvent = async (id) => {
     if (!window.confirm('Supprimer cet événement ?')) return;
     try {
-      const r = await fetch(`http://localhost:8000/api/admin/timeline/${id}`, {
+      const r = await fetch(`${API_URL}/api/admin/timeline/${id}`, {
         method: 'DELETE',
         credentials: 'include'
       });
@@ -232,8 +234,8 @@ function Admin() {
   const saveSkill = async () => {
     try {
       const url = editingItem 
-        ? `http://localhost:8000/api/admin/skills/${editingItem.id}` 
-        : 'http://localhost:8000/api/admin/skills';
+        ? `${API_URL}/api/admin/skills/${editingItem.id}` 
+        : `${API_URL}/api/admin/skills`;
       const method = editingItem ? 'PUT' : 'POST';
 
       const r = await fetch(url, {
@@ -246,7 +248,7 @@ function Admin() {
       if (!r.ok) throw new Error('Erreur sauvegarde');
 
       // Refresh skills
-      const refresh = await fetch('http://localhost:8000/api/skills', { credentials: 'include' });
+      const refresh = await fetch(`${API_URL}/api/skills`, { credentials: 'include' });
       if (refresh.ok) {
         const data = await refresh.json();
         setSkills(data.skills || []);
@@ -262,7 +264,7 @@ function Admin() {
   const deleteSkill = async (id) => {
     if (!window.confirm('Supprimer cette compétence ?')) return;
     try {
-      const r = await fetch(`http://localhost:8000/api/admin/skills/${id}`, {
+      const r = await fetch(`${API_URL}/api/admin/skills/${id}`, {
         method: 'DELETE',
         credentials: 'include'
       });
@@ -294,8 +296,8 @@ function Admin() {
   const saveIcon = async () => {
     try {
       const url = editingItem 
-        ? `http://localhost:8000/api/admin/tech-icons/${editingItem.id}` 
-        : 'http://localhost:8000/api/admin/tech-icons';
+        ? `${API_URL}/api/admin/tech-icons/${editingItem.id}` 
+        : `${API_URL}/api/admin/tech-icons`;
       const method = editingItem ? 'PUT' : 'POST';
 
       const r = await fetch(url, {
@@ -308,7 +310,7 @@ function Admin() {
       if (!r.ok) throw new Error('Erreur sauvegarde');
 
       // Refresh icons
-      const refresh = await fetch('http://localhost:8000/api/skills', { credentials: 'include' });
+      const refresh = await fetch(`${API_URL}/api/skills`, { credentials: 'include' });
       if (refresh.ok) {
         const data = await refresh.json();
         setTechIcons(data.techIcons || []);
@@ -324,7 +326,7 @@ function Admin() {
   const deleteTechIcon = async (id) => {
     if (!window.confirm('Supprimer cette icône ?')) return;
     try {
-      const r = await fetch(`http://localhost:8000/api/admin/tech-icons/${id}`, {
+      const r = await fetch(`${API_URL}/api/admin/tech-icons/${id}`, {
         method: 'DELETE',
         credentials: 'include'
       });
@@ -387,8 +389,8 @@ function Admin() {
       const cleanedImages = projectForm.images.filter(img => img.trim() !== '');
 
       const url = editingItem 
-        ? `http://localhost:8000/api/admin/projects/${editingItem.id}` 
-        : 'http://localhost:8000/api/admin/projects';
+        ? `${API_URL}/api/admin/projects/${editingItem.id}` 
+        : `${API_URL}/api/admin/projects`;
       const method = editingItem ? 'PUT' : 'POST';
 
       const r = await fetch(url, {
@@ -404,7 +406,7 @@ function Admin() {
       }
 
       // Refresh projects
-      const refresh = await fetch('http://localhost:8000/api/projects', { credentials: 'include' });
+      const refresh = await fetch(`${API_URL}/api/projects`, { credentials: 'include' });
       if (refresh.ok) {
         const data = await refresh.json();
         setProjects(data);
@@ -421,7 +423,7 @@ function Admin() {
   const deleteProject = async (id) => {
     if (!window.confirm('Supprimer ce projet ?')) return;
     try {
-      const r = await fetch(`http://localhost:8000/api/admin/projects/${id}`, {
+      const r = await fetch(`${API_URL}/api/admin/projects/${id}`, {
         method: 'DELETE',
         credentials: 'include'
       });

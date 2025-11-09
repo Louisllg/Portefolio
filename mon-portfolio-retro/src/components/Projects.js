@@ -8,7 +8,8 @@ function Projects() {
     const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
     useEffect(() => {
-        axios.get('http://127.0.0.1:8000/api/projects')
+        const apiUrl = process.env.REACT_APP_API_URL || 'http://localhost:8000';
+        axios.get(`${apiUrl}/api/projects`)
             .then(response => setProjects(response.data))
             .catch(error => console.error("Erreur lors du chargement des projets :", error));
     }, []);
@@ -46,6 +47,7 @@ function Projects() {
 
             return () => clearInterval(interval); 
         }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [selectedProject, currentImageIndex]);
     return (
         <div className="projects">
@@ -77,7 +79,7 @@ function Projects() {
                                 )}
                                 <img 
                                     src={selectedProject.images[currentImageIndex]}
-                                    alt={`${selectedProject.title} - Image ${currentImageIndex + 1}`}
+                                    alt={`${selectedProject.title} ${currentImageIndex + 1}`}
                                     className="carousel-image"
                                     onClick={nextImage}
                                 />

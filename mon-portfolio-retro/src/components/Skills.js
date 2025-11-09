@@ -22,7 +22,8 @@ function Skills() {
   useEffect(() => {
     const fetchSkills = async () => {
       try {
-        const r = await fetch('http://localhost:8000/api/skills');
+        const apiUrl = process.env.REACT_APP_API_URL || 'http://localhost:8000';
+        const r = await fetch(`${apiUrl}/api/skills`);
         if (r.ok) {
           const data = await r.json();
           setSkills(data.skills || []);

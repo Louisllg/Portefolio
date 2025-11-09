@@ -8,7 +8,8 @@ const Timeline = () => {
   useEffect(() => {
     const fetchTimeline = async () => {
       try {
-        const r = await fetch('http://localhost:8000/api/timeline');
+        const apiUrl = process.env.REACT_APP_API_URL || 'http://localhost:8000';
+        const r = await fetch(`${apiUrl}/api/timeline`);
         if (r.ok) {
           const data = await r.json();
           setEvents(data);
