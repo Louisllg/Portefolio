@@ -1,0 +1,567 @@
+.projects {
+  width: 90%;
+  max-width: 1200px;
+  margin: 100px auto;
+  padding: 60px 20px;
+  text-align: center;
+}
+
+.projects h2 {
+  font-size: 36px;
+  margin-bottom: 70px;
+  color: #fff;
+  text-shadow: 0 0 20px rgba(0, 255, 0, 0.5);
+  animation: titleGlow 2s ease-in-out infinite alternate;
+  position: relative;
+}
+
+.projects h2::before {
+  content: '< ';
+  color: #00ff00;
+}
+
+.projects h2::after {
+  content: ' />';
+  color: #00ff00;
+}
+
+@keyframes titleGlow {
+  from {
+    filter: brightness(1);
+  }
+  to {
+    filter: brightness(1.2);
+  }
+}
+
+.carousel {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 35px;
+  justify-content: center;
+}
+
+.project-card {
+  background: #000;
+  border: 2px solid #00ff00;
+  border-radius: 0;
+  padding: 25px;
+  min-height: 200px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 4px 4px 0 rgba(0, 255, 0, 0.3);
+}
+
+.project-card:hover {
+  transform: scale(1.05);
+  box-shadow: 6px 6px 0 #00ff00;
+  border-color: #fff;
+}
+
+.project-card h3 {
+  font-size: 16px;
+  color: #00ff00;
+  margin-bottom: 15px;
+  font-family: 'Press Start 2P', cursive;
+  text-shadow: 0 0 10px rgba(0, 255, 0, 0.6);
+  position: relative;
+  z-index: 1;
+  line-height: 1.6;
+}
+
+.project-card:hover h3 {
+  animation: glitchText 0.3s ease-in-out;
+}
+
+@keyframes glitchText {
+  0%, 100% {
+    transform: translate(0);
+  }
+  20% {
+    transform: translate(-2px, 2px);
+  }
+  40% {
+    transform: translate(-2px, -2px);
+  }
+  60% {
+    transform: translate(2px, 2px);
+  }
+  80% {
+    transform: translate(2px, -2px);
+  }
+}
+
+.project-card p {
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.85);
+  line-height: 1.8;
+  font-family: 'Press Start 2P', cursive;
+  position: relative;
+  z-index: 1;
+}
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.95);
+  backdrop-filter: blur(10px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2000;
+  animation: fadeIn 0.3s ease-in-out;
+  padding: 15px;
+  overflow-y: auto;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.modal-content {
+  background: #000;
+  border: 3px solid #00ff00;
+  border-radius: 0;
+  box-shadow: 10px 10px 0 rgba(0, 255, 0, 0.4);
+  padding: 50px 45px;
+  max-width: 900px;
+  width: calc(100% - 30px);
+  max-height: 90vh;
+  overflow-y: auto;
+  text-align: left;
+  position: relative;
+  animation: slideUp 0.3s ease-out;
+  box-sizing: border-box;
+  margin: auto;
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(50px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.modal-content h3 {
+  margin-bottom: 30px;
+  font-size: 26px;
+  color: #00ff00;
+  font-family: 'Press Start 2P', cursive;
+  text-shadow: 
+    0 0 20px rgba(0, 255, 0, 0.8),
+    3px 3px 0 rgba(0, 255, 0, 0.3);
+  line-height: 1.6;
+  text-align: center;
+  padding-bottom: 20px;
+  border-bottom: 2px solid rgba(0, 255, 0, 0.3);
+}
+
+.modal-content p {
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.9);
+  margin-bottom: 25px;
+  line-height: 2;
+  font-family: 'Press Start 2P', cursive;
+}
+
+.modal-content p strong {
+  color: #00ff00;
+  text-shadow: 0 0 10px rgba(0, 255, 0, 0.5);
+  display: block;
+  margin-bottom: 10px;
+  font-size: 14px;
+}
+
+.carousel-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  width: 100%;
+  max-width: 100%;
+  min-height: 450px;
+  margin: 35px 0;
+  overflow: hidden;
+  border-radius: 0;
+  background: rgba(0, 20, 0, 0.2);
+  border: 2px solid rgba(0, 255, 0, 0.2);
+}
+
+.carousel-image {
+  width: 100%;
+  max-width: 100%;
+  min-height: 450px;
+  max-height: 550px;
+  border: none;
+  box-shadow: none;
+  border-radius: 0;
+  object-fit: contain;
+  transition: transform 0.3s ease;
+  cursor: pointer;
+  background: transparent;
+}
+
+.carousel-image:active {
+  transform: scale(0.98);
+}
+
+.carousel-btn {
+  position: absolute;
+  background: #000;
+  border: 2px solid #00ff00;
+  width: 45px;
+  height: 45px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  cursor: pointer;
+  color: #00ff00;
+  border-radius: 0;
+  transition: all 0.3s ease;
+  box-shadow: 3px 3px 0 rgba(0, 255, 0, 0.4);
+}
+
+.carousel-btn:hover {
+  background: #00ff00;
+  color: #000;
+  transform: scale(1.1);
+  box-shadow: 5px 5px 0 rgba(0, 255, 0, 0.6);
+}
+
+.carousel-btn.left {
+  left: 10px;
+}
+
+.carousel-btn.right {
+  right: 10px;
+}
+
+.carousel-indicators {
+  position: absolute;
+  bottom: 15px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 10px;
+  z-index: 20;
+}
+
+.carousel-indicators span {
+  width: 10px;
+  height: 10px;
+  background: rgba(255, 255, 255, 0.3);
+  border: 2px solid #00ff00;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.carousel-indicators span:hover {
+  background: rgba(0, 255, 0, 0.5);
+}
+
+.carousel-indicators span.active {
+  background: #00ff00;
+  box-shadow: 0 0 10px rgba(0, 255, 0, 0.8);
+}
+
+.github-link {
+  display: inline-block;
+  text-decoration: none;
+  background: rgba(0, 255, 0, 0.1);
+  color: #00ff00;
+  border: 2px solid #00ff00;
+  padding: 14px 30px;
+  font-size: 12px;
+  font-family: 'Press Start 2P', cursive;
+  box-shadow: 3px 3px 0 rgba(0, 255, 0, 0.4);
+  transition: all 0.3s ease;
+  margin: 10px 0;
+}
+
+.github-link:hover {
+  background: #00ff00;
+  color: #000;
+  transform: translate(-2px, -2px);
+  box-shadow: 5px 5px 0 rgba(0, 255, 0, 0.6);
+}
+
+.close-btn {
+  background: #00ff00;
+  color: #000;
+  border: 2px solid #00ff00;
+  padding: 14px 35px;
+  font-size: 13px;
+  font-family: 'Press Start 2P', cursive;
+  cursor: pointer;
+  border-radius: 0;
+  transition: all 0.3s ease;
+  margin-top: 35px;
+  box-shadow: 4px 4px 0 rgba(0, 255, 0, 0.4);
+  display: block;
+  width: fit-content;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.close-btn:hover {
+  background: #fff;
+  color: #000;
+  border-color: #fff;
+  transform: translate(-2px, -2px);
+  box-shadow: 6px 6px 0 rgba(0, 255, 0, 0.6);
+}
+
+.modal-content::-webkit-scrollbar {
+  width: 8px;
+}
+
+.modal-content::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 4px;
+}
+
+.modal-content::-webkit-scrollbar-thumb {
+  background: #00ff00;
+  border-radius: 4px;
+  box-shadow: 0 0 10px rgba(0, 255, 0, 0.5);
+}
+
+.modal-content::-webkit-scrollbar-thumb:hover {
+  background: #00ff00;
+  box-shadow: 0 0 15px rgba(0, 255, 0, 0.8);
+}
+
+@media (max-width: 1024px) {
+  .projects h2 {
+    font-size: 36px;
+    margin-bottom: 60px;
+  }
+
+  .carousel {
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 30px;
+  }
+
+  .project-card {
+    padding: 25px;
+    min-height: 200px;
+  }
+
+  .project-card h3 {
+    font-size: 18px;
+  }
+
+  .project-card p {
+    font-size: 12px;
+  }
+
+  .modal-content h3 {
+    font-size: 24px;
+  }
+
+  .modal-content p {
+    font-size: 13px;
+  }
+}
+
+@media (max-width: 768px) {
+  .projects {
+    margin: 60px auto;
+    padding: 40px 15px;
+  }
+
+  .projects h2 {
+    font-size: 28px;
+    margin-bottom: 50px;
+  }
+
+  .carousel {
+    grid-template-columns: 1fr;
+    gap: 25px;
+  }
+
+  .project-card {
+    padding: 22px;
+    min-height: 180px;
+  }
+
+  .project-card h3 {
+    font-size: 16px;
+  }
+
+  .project-card p {
+    font-size: 11px;
+  }
+
+  .modal-content {
+    padding: 30px 20px;
+    width: calc(100% - 20px);
+    max-width: 95%;
+    box-shadow: 6px 6px 0 rgba(0, 255, 0, 0.4);
+  }
+
+  .modal-content h3 {
+    font-size: 18px;
+    line-height: 1.8;
+    margin-bottom: 25px;
+    padding-bottom: 15px;
+  }
+
+  .modal-content p {
+    font-size: 11px;
+    line-height: 2.2;
+    margin-bottom: 20px;
+  }
+
+  .modal-content p strong {
+    font-size: 12px;
+    margin-bottom: 8px;
+  }
+
+  .carousel-container {
+    max-width: 100%;
+    min-height: 280px;
+    margin: 25px 0;
+  }
+
+  .carousel-image {
+    min-height: 280px;
+    max-height: 380px;
+  }
+
+  .carousel-btn {
+    width: 38px;
+    height: 38px;
+    font-size: 20px;
+  }
+
+  .carousel-indicators {
+    bottom: 10px;
+    gap: 7px;
+  }
+
+  .carousel-indicators span {
+    width: 8px;
+    height: 8px;
+  }
+
+  .github-link {
+    padding: 12px 22px;
+    font-size: 10px;
+    width: 100%;
+    text-align: center;
+    box-sizing: border-box;
+  }
+
+  .close-btn {
+    padding: 12px 28px;
+    font-size: 11px;
+    margin-top: 25px;
+  }
+}
+
+@media (max-width: 480px) {
+  .projects h2 {
+    font-size: 22px;
+  }
+
+  .project-card {
+    padding: 18px;
+  }
+
+  .project-card h3 {
+    font-size: 14px;
+  }
+
+  .project-card p {
+    font-size: 10px;
+  }
+
+  .modal-content {
+    padding: 20px 15px;
+    width: calc(100% - 10px);
+    max-width: 98%;
+    box-shadow: 4px 4px 0 rgba(0, 255, 0, 0.4);
+  }
+  
+  .modal-overlay {
+    padding: 5px;
+  }
+
+  .modal-content h3 {
+    font-size: 15px;
+    line-height: 2;
+    margin-bottom: 20px;
+    padding-bottom: 12px;
+  }
+
+  .modal-content p {
+    font-size: 9px;
+    line-height: 2.4;
+    margin-bottom: 18px;
+  }
+
+  .modal-content p strong {
+    font-size: 10px;
+    margin-bottom: 6px;
+  }
+
+  .carousel-container {
+    min-height: 220px;
+    margin: 20px 0;
+  }
+
+  .carousel-image {
+    min-height: 220px;
+    max-height: 320px;
+  }
+
+  .carousel-btn {
+    width: 32px;
+    height: 32px;
+    font-size: 16px;
+  }
+
+  .carousel-indicators {
+    bottom: 8px;
+    gap: 5px;
+  }
+
+  .carousel-indicators span {
+    width: 6px;
+    height: 6px;
+    border-width: 1px;
+  }
+
+  .github-link {
+    padding: 10px 18px;
+    font-size: 9px;
+    width: 100%;
+    text-align: center;
+  }
+
+  .close-btn {
+    padding: 10px 20px;
+    font-size: 10px;
+    margin-top: 20px;
+  }
+}

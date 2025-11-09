@@ -1,0 +1,379 @@
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
+html, body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  background-color: #000000;
+  color: #ffffff;
+  font-family: 'Press Start 2P', cursive;
+  scroll-behavior: smooth;
+  position: relative;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: repeating-linear-gradient(
+    0deg,
+    rgba(0, 0, 0, 0.15) 0px,
+    rgba(0, 0, 0, 0.15) 1px,
+    transparent 1px,
+    transparent 2px
+  );
+  pointer-events: none;
+  z-index: 9999;
+  animation: scanlines 8s linear infinite;
+}
+
+@keyframes scanlines {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(2px);
+  }
+}
+
+body::after {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(18, 16, 16, 0.1);
+  opacity: 0;
+  pointer-events: none;
+  z-index: 9998;
+  animation: flicker 0.15s infinite;
+}
+
+@keyframes flicker {
+  0% {
+    opacity: 0.05;
+  }
+  50% {
+    opacity: 0.08;
+  }
+  100% {
+    opacity: 0.05;
+  }
+}
+
+.App {
+  width: 100%;
+  overflow-x: hidden;
+}
+
+section {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  text-align: center;
+}
+
+@media (max-width: 768px) {
+  section {
+    padding: 60px 15px;
+  }
+  
+  .navbar ul {
+    gap: 15px;
+  }
+
+  .navbar ul li a {
+    font-size: 12px;
+  }
+
+  h1, h2 {
+    font-size: 18px !important;
+  }
+}
+
+section {
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeUp 1s ease forwards;
+}
+
+@keyframes fadeUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+button {
+  position: relative;
+  overflow: hidden;
+}
+
+button::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 120%;
+  height: 0;
+  padding-bottom: 120%;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  transform: translate(-50%, -50%) scale(0);
+  transition: transform 0.6s ease-out;
+}
+
+button:hover::after {
+  transform: translate(-50%, -50%) scale(1);
+}
+
+.loading-screen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100vw;
+  background-color: #000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+.loading-screen h2 {
+  font-family: 'Press Start 2P', cursive;
+  color: #00ff00;
+  font-size: 24px;
+  text-shadow: 0 0 10px #00ff00, 0 0 20px #00ff00;
+  animation: blink 1s infinite alternate;
+}
+
+@keyframes blink {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0.1;
+  }
+}
+
+.loading-screen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  font-family: 'Press Start 2P', cursive;
+  animation: fadeOut 0.5s ease-out 2.8s forwards;
+}
+
+.terminal-boot {
+  max-width: 700px;
+  width: 90%;
+  padding: 50px 45px;
+  background: #0a0a0a;
+  border: 4px solid #00ff00;
+  border-radius: 12px;
+  box-shadow: 
+    0 0 40px rgba(0, 255, 0, 0.5),
+    inset 0 0 30px rgba(0, 255, 0, 0.05);
+  position: relative;
+}
+
+.terminal-boot::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    to bottom,
+    rgba(0, 255, 0, 0.03) 0px,
+    rgba(0, 255, 0, 0.03) 2px,
+    transparent 3px,
+    transparent 6px
+  );
+  pointer-events: none;
+  border-radius: 8px;
+}
+
+.boot-line {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+  padding: 12px 16px;
+  background: rgba(0, 255, 0, 0.05);
+  border-left: 3px solid #00ff00;
+  border-radius: 4px;
+  opacity: 0;
+  animation: bootLineAppear 0.5s ease-out forwards;
+}
+
+.boot-line:nth-child(1) { animation-delay: 0.3s; }
+.boot-line:nth-child(2) { animation-delay: 0.7s; }
+.boot-line:nth-child(3) { animation-delay: 1.1s; }
+
+.boot-label {
+  color: #00ff00;
+  font-size: 13px;
+  text-shadow: 0 0 10px rgba(0, 255, 0, 0.9);
+  letter-spacing: 2px;
+}
+
+.boot-status {
+  color: rgba(255, 255, 255, 0.85);
+  font-size: 10px;
+  animation: blink 1.5s infinite;
+}
+
+.boot-progress-bar {
+  width: 100%;
+  height: 28px;
+  background: #111;
+  border: 3px solid #00ff00;
+  border-radius: 8px;
+  margin: 35px 0 25px 0;
+  overflow: hidden;
+  position: relative;
+  opacity: 0;
+  animation: bootLineAppear 0.5s ease-out 1.5s forwards;
+  box-shadow: 
+    0 0 15px rgba(0, 255, 0, 0.3),
+    inset 0 2px 8px rgba(0, 0, 0, 0.8);
+}
+
+.boot-progress-fill {
+  height: 100%;
+  background: 
+    repeating-linear-gradient(
+      90deg,
+      #00ff00 0px,
+      #00ff00 10px,
+      #00dd00 10px,
+      #00dd00 20px
+    );
+  width: 0%;
+  transition: width 0.15s ease-out;
+  box-shadow: 
+    0 0 20px #00ff00,
+    inset 0 2px 10px rgba(255, 255, 255, 0.3);
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-size: 20px 100%;
+}
+
+.boot-percentage {
+  color: #000;
+  font-size: 11px;
+  font-weight: bold;
+  position: relative;
+  z-index: 2;
+  text-shadow: 0 0 3px rgba(255, 255, 255, 0.5);
+}
+
+.boot-progress-fill::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 4px;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.9);
+  box-shadow: 0 0 10px #00ff00, 0 0 20px #00ff00;
+  animation: bootProgressCursor 0.5s ease-in-out infinite;
+  z-index: 1;
+}
+
+.boot-message {
+  text-align: center;
+  color: #00ff00;
+  font-size: 16px;
+  margin-top: 30px;
+  opacity: 0;
+  animation: bootLineAppear 0.5s ease-out 2.3s forwards;
+  text-shadow: 0 0 15px rgba(0, 255, 0, 0.9);
+  letter-spacing: 1px;
+}
+
+@keyframes bootLineAppear {
+  from {
+    opacity: 0;
+    transform: translateX(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes bootProgressFill {
+  0% { 
+    width: 0%; 
+  }
+  100% { 
+    width: 100%; 
+  }
+}
+
+@keyframes bootProgressCursor {
+  0%, 100% { 
+    opacity: 1;
+  }
+  50% { 
+    opacity: 0.3;
+  }
+}
+
+@keyframes bootPercentageAppear {
+  from {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes fadeOut {
+  100% { opacity: 0; visibility: hidden; }
+}
+
+@media (max-width: 768px) {
+  .terminal-boot {
+    padding: 35px 25px;
+  }
+
+  .boot-line {
+    padding: 10px 12px;
+    margin-bottom: 18px;
+  }
+
+  .boot-label {
+    font-size: 11px;
+  }
+
+  .boot-status {
+    font-size: 9px;
+  }
+
+  .boot-message {
+    font-size: 13px;
+  }
+
+  .boot-progress-bar {
+    height: 24px;
+  }
+}

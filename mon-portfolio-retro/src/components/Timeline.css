@@ -1,0 +1,136 @@
+.timeline {
+    width: 90%;
+    max-width: 800px;
+    margin: 80px auto;
+    padding: 20px;
+  }
+  
+  .timeline h2 {
+    text-align: center;
+    margin-bottom: 60px;
+    font-size: 2.8rem;
+    color: #fff;
+    text-shadow: 0 0 20px rgba(0, 255, 0, 0.5);
+    animation: neonPulse 2s ease-in-out infinite alternate;
+  }
+
+  @keyframes neonPulse {
+    from {
+      text-shadow: 0 0 10px rgba(0, 255, 0, 0.3), 0 0 20px rgba(0, 255, 0, 0.2);
+    }
+    to {
+      text-shadow: 0 0 20px rgba(0, 255, 0, 0.6), 0 0 30px rgba(0, 255, 0, 0.4), 0 0 40px rgba(0, 255, 0, 0.2);
+    }
+  }
+  
+  .timeline-tetris {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  
+  .tetris-block {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    background-color: #111;
+    border: 2px solid #00ff00;
+    box-shadow: 5px 5px 0 #00ff00;
+    padding: 15px;
+    opacity: 0;
+    transform: translateX(-150%);
+    transition: all 0.5s ease;
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* Effet glow au hover */
+  .tetris-block::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(0, 255, 0, 0.2), transparent);
+    transition: left 0.5s;
+  }
+
+  .tetris-block:hover::before {
+    left: 100%;
+  }
+
+  .tetris-block:hover {
+    transform: translateX(0) scale(1.02);
+    box-shadow: 0 0 20px rgba(0, 255, 0, 0.6), 5px 5px 0 #00ff00;
+    border-color: #fff;
+  }
+  
+  .tetris-block:nth-child(even) {
+    transform: translateX(150%);
+  }
+
+  .tetris-block:nth-child(even):hover {
+    transform: translateX(0) scale(1.02);
+  }
+  
+  .tetris-block.animate {
+    animation: slideIn 1s ease forwards;
+  }
+  
+  .tetris-date {
+    font-weight: bold;
+    margin-right: 20px;
+    color: #00ff00;
+    min-width: 60px;
+    text-align: center;
+    text-shadow: 0 0 10px rgba(0, 255, 0, 0.6);
+    transition: all 0.3s ease;
+  }
+
+  .tetris-block:hover .tetris-date {
+    text-shadow: 0 0 20px rgba(0, 255, 0, 1);
+    transform: scale(1.1);
+  }
+  
+  .tetris-content h3 {
+    margin: 0;
+    font-size: 1.2rem;
+    color: #fff;
+  }
+  
+  .tetris-content p {
+    margin: 5px 0 0;
+    font-size: 1rem;
+    color: #ccc;
+  }
+  
+  @keyframes slideIn {
+    to {
+      transform: translateX(0);
+      opacity: 1;
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .tetris-block {
+      flex-direction: column;
+      text-align: center;
+    }
+  
+    .tetris-date {
+      margin: 0 0 10px 0;
+    }
+  
+    .timeline h2 {
+      font-size: 1.6rem;
+    }
+  
+    .tetris-content h3 {
+      font-size: 1rem;
+    }
+  
+    .tetris-content p {
+      font-size: 0.9rem;
+    }
+  }

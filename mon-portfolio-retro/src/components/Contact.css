@@ -1,0 +1,261 @@
+.contact {
+  width: 90%;
+  max-width: 700px;
+  margin: 100px auto 80px;
+  padding: 50px 35px;
+  background: #000;
+  border: 3px solid #00ff00;
+  border-radius: 0;
+  box-shadow: 8px 8px 0 rgba(0, 255, 0, 0.3);
+  position: relative;
+  overflow: hidden;
+}
+
+.contact h2 {
+  font-size: 36px;
+  margin-bottom: 50px;
+  text-align: center;
+  color: #fff;
+  text-shadow: 0 0 20px rgba(0, 255, 0, 0.5);
+  animation: titleGlow 2s ease-in-out infinite alternate;
+  position: relative;
+  z-index: 1;
+}
+
+.contact h2::before {
+  content: '< ';
+  color: #00ff00;
+}
+
+.contact h2::after {
+  content: ' />';
+  color: #00ff00;
+}
+
+@keyframes titleGlow {
+  from {
+    filter: brightness(1);
+  }
+  to {
+    filter: brightness(1.2);
+  }
+}
+
+.contact form {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+  position: relative;
+  z-index: 1;
+}
+
+.contact label {
+  font-size: 13px;
+  color: #00ff00;
+  font-family: 'Press Start 2P', cursive;
+  margin-bottom: 8px;
+  display: block;
+  text-shadow: 0 0 10px rgba(0, 255, 0, 0.5);
+}
+
+.contact input,
+.contact textarea {
+  padding: 14px;
+  border: 2px solid #00ff00;
+  background: #000;
+  color: #00ff00;
+  font-family: 'Press Start 2P', cursive;
+  font-size: 11px;
+  resize: vertical;
+  border-radius: 0;
+  outline: none;
+  transition: all 0.3s ease;
+  box-shadow: 3px 3px 0 rgba(0, 255, 0, 0.3);
+}
+
+.contact input::placeholder,
+.contact textarea::placeholder {
+  color: rgba(0, 255, 0, 0.4);
+}
+
+.contact input:focus,
+.contact textarea:focus {
+  border-color: #fff;
+  box-shadow: 5px 5px 0 rgba(0, 255, 0, 0.5);
+  background: #000;
+}
+
+.contact input[type="tel"] {
+  padding: 16px;
+}
+
+.contact textarea {
+  min-height: 180px;
+  line-height: 1.8;
+}
+
+.contact button {
+  padding: 15px 35px;
+  background: #00ff00;
+  border: 2px solid #00ff00;
+  cursor: pointer;
+  color: #000;
+  font-family: 'Press Start 2P', cursive;
+  font-size: 13px;
+  border-radius: 0;
+  transition: all 0.3s ease;
+  box-shadow: 4px 4px 0 rgba(0, 255, 0, 0.4);
+  position: relative;
+  overflow: hidden;
+}
+
+.contact button:hover {
+  background: #fff;
+  color: #000;
+  border-color: #fff;
+  transform: translate(-2px, -2px);
+  box-shadow: 6px 6px 0 rgba(0, 255, 0, 0.6);
+}
+
+.contact button:active {
+  transform: translate(0, 0);
+  box-shadow: 3px 3px 0 rgba(0, 255, 0, 0.4);
+}
+
+.contact-message {
+  padding: 12px 18px;
+  border-radius: 0;
+  font-family: 'Press Start 2P', cursive;
+  font-size: 10px;
+  text-align: center;
+  animation: fadeIn 0.5s ease;
+  margin-top: 20px;
+}
+
+.contact-message.success {
+  background: #000;
+  border: 2px solid #00ff00;
+  color: #00ff00;
+  box-shadow: 3px 3px 0 rgba(0, 255, 0, 0.4);
+}
+
+.contact-message.error {
+  background: #000;
+  border: 2px solid #ff6b6b;
+  color: #ff6b6b;
+  box-shadow: 3px 3px 0 rgba(255, 107, 107, 0.4);
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 1024px) {
+  .contact {
+    padding: 50px 35px;
+  }
+
+  .contact h2 {
+    font-size: 36px;
+    margin-bottom: 40px;
+  }
+
+  .contact label {
+    font-size: 12px;
+  }
+
+  .contact input,
+  .contact textarea {
+    padding: 14px;
+    font-size: 11px;
+  }
+
+  .contact button {
+    padding: 16px 35px;
+    font-size: 13px;
+  }
+}
+
+@media (max-width: 768px) {
+  .contact {
+    width: calc(100% - 40px);
+    max-width: none;
+    margin: 60px 20px;
+    padding: 40px 20px;
+  }
+
+  .contact h2 {
+    font-size: 28px;
+    margin-bottom: 35px;
+  }
+
+  .contact form {
+    gap: 20px;
+  }
+
+  .contact label {
+    font-size: 11px;
+  }
+
+  .contact input,
+  .contact textarea {
+    padding: 13px;
+    font-size: 10px;
+  }
+
+  .contact textarea {
+    min-height: 150px;
+  }
+
+  .contact button {
+    padding: 14px 30px;
+    font-size: 12px;
+  }
+
+  .contact-message {
+    font-size: 10px;
+    padding: 12px 15px;
+  }
+}
+
+@media (max-width: 480px) {
+  .contact {
+    width: calc(100% - 30px);
+    margin: 40px 15px;
+    padding: 30px 15px;
+  }
+
+  .contact h2 {
+    font-size: 22px;
+  }
+
+  .contact label {
+    font-size: 10px;
+  }
+
+  .contact input,
+  .contact textarea {
+    padding: 12px;
+    font-size: 9px;
+  }
+
+  .contact textarea {
+    min-height: 130px;
+  }
+
+  .contact button {
+    padding: 12px 25px;
+    font-size: 11px;
+  }
+
+  .contact-message {
+    font-size: 9px;
+  }
+}

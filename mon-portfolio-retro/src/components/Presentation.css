@@ -1,0 +1,336 @@
+.presentation {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 0 40px 60px;
+  position: relative;
+  overflow: hidden;
+}
+
+.presentation::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: 
+    linear-gradient(rgba(0, 255, 0, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 255, 0, 0.05) 1px, transparent 1px);
+  background-size: 40px 40px;
+  animation: gridMove 15s linear infinite;
+  z-index: 0;
+}
+
+@keyframes gridMove {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(40px);
+  }
+}
+
+.presentation-content {
+  position: relative;
+  z-index: 1;
+  max-width: 900px;
+  opacity: 0;
+  animation: fadeInUp 1s ease forwards 0.3s;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.presentation-greeting {
+  font-size: 16px;
+  color: rgba(255, 255, 255, 0.7);
+  margin-bottom: 25px;
+  font-family: 'Press Start 2P', cursive;
+  animation: fadeIn 1s ease forwards 0.5s;
+  opacity: 0;
+}
+
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+  }
+}
+
+.presentation h1 {
+  font-size: 52px;
+  margin-bottom: 35px;
+  line-height: 1.3;
+  color: #00ff00;
+  text-shadow: 0 0 20px rgba(0, 255, 0, 0.5), 0 0 30px rgba(0, 255, 0, 0.3);
+  animation: neonGlow 2s ease-in-out infinite alternate, slideInLeft 1s ease forwards 0.7s;
+  opacity: 0;
+  position: relative;
+  word-wrap: break-word;
+}
+
+.presentation h1::after {
+  content: '█';
+  color: #00ff00;
+  animation: blink 1s step-end infinite;
+}
+
+@keyframes neonGlow {
+  from {
+    text-shadow: 0 0 10px rgba(0, 255, 0, 0.3), 0 0 20px rgba(0, 255, 0, 0.2), 0 0 30px rgba(0, 255, 0, 0.1);
+    filter: brightness(1);
+  }
+  to {
+    text-shadow: 0 0 20px rgba(0, 255, 0, 0.5), 0 0 30px rgba(0, 255, 0, 0.3), 0 0 40px rgba(0, 255, 0, 0.2);
+    filter: brightness(1.1);
+  }
+}
+
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes blink {
+  0%, 50% {
+    opacity: 1;
+  }
+  51%, 100% {
+    opacity: 0;
+  }
+}
+
+.presentation-description {
+  font-size: 16px;
+  color: rgba(255, 255, 255, 0.85);
+  margin-bottom: 50px;
+  line-height: 2;
+  font-family: 'Press Start 2P', cursive;
+  animation: slideInRight 1s ease forwards 0.9s;
+  opacity: 0;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.presentation-description .highlight {
+  color: #00ff00;
+  text-shadow: 0 0 10px rgba(0, 255, 0, 0.6);
+}
+
+.presentation-cta {
+  display: flex;
+  gap: 25px;
+  justify-content: center;
+  flex-wrap: wrap;
+  animation: fadeInScale 1s ease forwards 1.1s;
+  opacity: 0;
+}
+
+@keyframes fadeInScale {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.presentation-btn {
+  padding: 16px 35px;
+  font-size: 13px;
+  font-family: 'Press Start 2P', cursive;
+  text-decoration: none;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+
+.presentation-btn::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.2);
+  transform: translate(-50%, -50%);
+  transition: width 0.5s, height 0.5s;
+}
+
+.presentation-btn:hover::before {
+  width: 400px;
+  height: 400px;
+}
+
+.btn-primary {
+  background: #00ff00;
+  color: #000;
+  border: 2px solid #00ff00;
+  box-shadow: 0 0 20px rgba(0, 255, 0, 0.4);
+}
+
+.btn-primary:hover {
+  background: transparent;
+  color: #00ff00;
+  transform: translateY(-5px);
+  box-shadow: 0 10px 30px rgba(0, 255, 0, 0.6);
+}
+
+.btn-secondary {
+  background: transparent;
+  color: #fff;
+  border: 2px solid rgba(255, 255, 255, 0.5);
+}
+
+.btn-secondary:hover {
+  border-color: #00ff00;
+  color: #00ff00;
+  transform: translateY(-5px);
+  box-shadow: 0 10px 30px rgba(0, 255, 0, 0.3);
+}
+
+.scroll-indicator {
+  position: absolute;
+  bottom: 80px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  animation: bounce 2s infinite, fadeIn 1s ease forwards 1.5s;
+  opacity: 0;
+  cursor: pointer;
+}
+
+@keyframes bounce {
+  0%, 20%, 50%, 80%, 100% {
+    transform: translateX(-50%) translateY(0);
+  }
+  40% {
+    transform: translateX(-50%) translateY(-10px);
+  }
+  60% {
+    transform: translateX(-50%) translateY(-5px);
+  }
+}
+
+.scroll-indicator span {
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.6);
+  font-family: 'Press Start 2P', cursive;
+}
+
+.scroll-indicator .arrow {
+  width: 0;
+  height: 0;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  border-top: 12px solid #00ff00;
+  filter: drop-shadow(0 0 8px rgba(0, 255, 0, 0.6));
+}
+
+@media (max-width: 1024px) {
+  .presentation h1 {
+    font-size: 48px;
+  }
+
+  .presentation-description {
+    font-size: 16px;
+  }
+
+  .presentation-btn {
+    padding: 14px 28px;
+    font-size: 11px;
+  }
+}
+
+@media (max-width: 768px) {
+  .presentation {
+    padding: 0 20px 50px;
+  }
+
+  .presentation-greeting {
+    font-size: 12px;
+  }
+
+  .presentation h1 {
+    font-size: 28px;
+    margin-bottom: 25px;
+  }
+
+  .presentation-description {
+    font-size: 11px;
+    line-height: 2;
+    margin-bottom: 40px;
+  }
+
+  .presentation-cta {
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .presentation-btn {
+    padding: 12px 25px;
+    font-size: 10px;
+    width: 100%;
+    max-width: 300px;
+  }
+
+  .scroll-indicator {
+    bottom: 30px;
+  }
+
+  .scroll-indicator span {
+    font-size: 9px;
+  }
+}
+
+@media (max-width: 480px) {
+  .presentation h1 {
+    font-size: 24px;
+  }
+
+  .presentation-description {
+    font-size: 11px;
+  }
+
+  .presentation-btn {
+    font-size: 9px;
+    padding: 10px 20px;
+  }
+}
